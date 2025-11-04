@@ -207,3 +207,4 @@ marimo/_lsp/
 __marimo__/
 data/GTFS/st
 data/GTFS/stop_times_dossier/stop_times.txt
+data/GTFS/stop_times.txt
