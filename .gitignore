@@ -206,9 +206,12 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 
+
 data/gtfs/stop_times.txt
 data/poi/poi_commerce.geojson 
 data/poi/poi_logement.geojson 
 data/poi/poi_sports.geojson 
 data/poi/poi_restaurants.geojson 
 data/poi/poi_bureaux.geojson 
+
+cache
