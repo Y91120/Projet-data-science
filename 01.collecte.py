@@ -92,11 +92,22 @@ def extraire_poi_osm(categorie):
 
     gdf = ox.features_from_bbox(bbox, tags)
 
+    # simplification : on prend le centroïde pour tous les objets
     if "geometry" in gdf.columns:
         gdf["geometry"] = gdf.geometry.centroid
 
-    gdf.to_file(POI_DIR / f"poi_{categorie}.geojson", driver="GeoJSON")
+    # Sauvegarde GeoJSON
+    geojson_path = POI_DIR / f"poi_{categorie}.geojson"
+    gdf.to_file(geojson_path, driver="GeoJSON")
+
+    # Sauvegarde Parquet optimisé
+    parquet_path = POI_DIR / f"poi_{categorie}.parquet"
+    gdf.to_parquet(parquet_path, index=False)
+
+    logger.info(f"POI {categorie} exporté → {geojson_path.name} + {parquet_path.name}")
+
     return gdf
+
 
 # ---------------------------------------------------------------------------
 # UTILISATION
