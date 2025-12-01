@@ -28,7 +28,7 @@ IDF_BBOX = {
 
 DEPARTEMENTS_IDF = ["75", "77", "78", "91", "92", "93", "94", "95"]
 
-# POI : exemple minimal
+# POI : séléction des POI les plus utiles pour notre analyse
 POI_CATEGORIES = {
     "commerce": {"tags": {"shop": True}},
     "restaurants": {"tags": {"amenity": "restaurant"}},
@@ -100,7 +100,7 @@ def extraire_poi_osm(categorie):
     geojson_path = POI_DIR / f"poi_{categorie}.geojson"
     gdf.to_file(geojson_path, driver="GeoJSON")
 
-    # Sauvegarde Parquet optimisé
+    # Sauvegarde Parquet optimisé pour les plus lourds
     parquet_path = POI_DIR / f"poi_{categorie}.parquet"
     gdf.to_parquet(parquet_path, index=False)
 
@@ -117,7 +117,7 @@ if __name__ == "__main__":
 
     for cat in POI_CATEGORIES:
         out_file = POI_DIR / f"poi_{cat}.geojson"
-        if out_file.exists():
+        if out_file.exists(): #pour ne pas re télécharger des fichiers existants
             logger.info(f"POI {cat} déjà existant, passage")
             continue
         extraire_poi_osm(cat)
