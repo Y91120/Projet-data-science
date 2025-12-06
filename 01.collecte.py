@@ -11,9 +11,9 @@ from pathlib import Path
 # ---------------------------------------------------------------------------
 # CHEMINS
 # ---------------------------------------------------------------------------
-DATA_DIR = Path("data")
+DATA_DIR = Path("Projet-data-science/data")
 GTFS_DIR = DATA_DIR / "gtfs"
-POI_DIR = DATA_DIR / "poi"
+POI_DIR  = DATA_DIR / "poi"
 
 GTFS_DIR.mkdir(parents=True, exist_ok=True)
 POI_DIR.mkdir(parents=True, exist_ok=True)
@@ -29,24 +29,15 @@ IDF_BBOX = {
 DEPARTEMENTS_IDF = ["75", "77", "78", "91", "92", "93", "94", "95"]
 
 # POI : séléction des POI les plus utiles pour notre analyse
-POI_CATEGORIES = {"commerce": {"tags": {"shop": True}},
-    "restaurants": {"tags": {"amenity": "restaurant"}},
-    "bureaux": {"tags": {"office": True}},
-    "administration": {"tags": {"amenity": ["townhall", "government"]}},
-    "culture": {"tags": {"amenity": ["theatre", "museum", "cinema", "arts_centre"]}},
-    "education": {"tags": {"amenity": "school"}},
-    "sante": {"tags": {"amenity": "hospital"}},
-    "logement": {"tags": {"building": ["residential", "apartments", "house", "detached", "semi-detached"]}},
-    "monument": {"tags": {"historic": "monument", "tourism": "attraction"}},
-    "sports": {"tags": {"leisure": ["sports_centre", "pitch", "stadium", "swimming_pool"]}},
-    "commerce_proximite": {"amenity": ["cafe","bar","fast_food"], "shop": ["bakery","supermarket","convenience"]},
-    "commerce_majeur": {"shop": ["mall","department_store"]},
-    "education2": {"amenity": ["school","kindergarten","college","university"]},
-    "sante2": {"amenity": ["hospital", "clinic", "doctors"]},
-    "administration2": {"amenity": ["townhall","courthouse","police","post_office"]},
-    "culture_tourisme": {"amenity":["museum","cinema","theatre"], "tourism":["attraction","museum"], "historic":"monument"},
-    "bureaux2": {"office": ["company", "corporate", "it", "administrative", "government"]}, 
-    "sports_loisirs": {"leisure": ["sports_centre","stadium","pitch","swimming_pool"]}
+POI_CATEGORIES = {
+    "commerce_proximite": {"tags":{"amenity": ["cafe","bar","fast_food"], "shop": ["bakery","supermarket","convenience"]}},
+    "commerce_majeur": {"tags":{"shop": ["mall","department_store"]}},
+    "education2": {"tags":{"amenity": ["school","kindergarten","college","university"]}},
+    "sante2": {"tags":{"amenity": ["hospital", "clinic", "doctors"]}},
+    "administration2": {"tags":{"amenity": ["townhall","courthouse","police","post_office"]}},
+    "culture_tourisme": {"tags":{"amenity":["museum","cinema","theatre"], "tourism":["attraction","museum"], "historic":"monument"}},
+    "bureaux2": {"tags":{"office": ["company", "corporate", "it", "administrative", "government"]}}, 
+    "sports_loisirs": {"tags":{"leisure": ["sports_centre","stadium","pitch","swimming_pool"]}}
 }
 
 
