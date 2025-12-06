@@ -106,7 +106,44 @@ def extraire_poi_osm(categorie):
     logger.info(f"POI {categorie} exporté → {geojson_path.name} + {parquet_path.name}")
 
     return gdf
+#Pour les geojson pas encore convertis 
+def convertir_geojson_en_parquet(poi_dir=POI_DIR):
+    """
+    Convertit tous les geojson présents dans data/poi/ en parquet.
+    Si un fichier parquet du même nom existe déjà → il est ignoré.
+    """
 
+    files = list(poi_dir.glob("*.geojson"))
+    if not files:
+        print("Aucun GeoJSON trouvé.")
+        return
+
+    for geojson_file in files:
+        parquet_file = geojson_file.with_suffix(".parquet")
+
+        # Saut si déjà converti
+        if parquet_file.exists():
+            print(f"✔ Déjà converti : {parquet_file.name}")
+            continue
+
+        print(f"Conversion : {geojson_file.name} → {parquet_file.name}")
+
+        try:
+            gdf = gpd.read_file(geojson_file)
+
+            # On s'assure que tout a bien un CRS cohérent (WGS84)
+            if gdf.crs is None:
+                print(f" Pas de CRS détecté pour {geojson_file.name} → assignation EPSG:4326")
+                gdf = gdf.set_crs("EPSG:4326", allow_override=True)
+
+            # Conversion et sauvegarde
+            gdf.to_parquet(parquet_file, index=False)
+            print(f"OK : {parquet_file.name} généré")
+
+        except Exception as e:
+            print(f"ERREUR pour {geojson_file.name} —> {e}")
+
+    print("\nConversion GeoJSON → Parquet terminée.")
 
 # ---------------------------------------------------------------------------
 # UTILISATION
@@ -114,6 +151,8 @@ def extraire_poi_osm(categorie):
 if __name__ == "__main__":
     #telecharger_gtfs_idfm()
 
+    convertir_geojson_en_parquet()
+    
     for cat in POI_CATEGORIES:
         out_file = POI_DIR / f"poi_{cat}.geojson"
         if out_file.exists(): #pour ne pas re télécharger des fichiers existants
