@@ -213,5 +213,13 @@ data/poi/poi_logement.geojson
 data/poi/poi_sports.geojson 
 data/poi/poi_restaurants.geojson 
 data/poi/poi_bureaux.geojson 
+data/poi/poi_commerce_majeur.geojson 
+data/poi/poi_commerce_proximite.geojson 
+data/poi/poi_education2.geojson 
+data/poi/poi_sante2.geojson 
+data/poi/poi_administration2.geojson 
+data/poi/poi_culture_tourisme.geojson 
+data/poi/poi_bureaux2.geojson 
+data/poi/poi_sports_loisirs.geojson 
 
 cache
