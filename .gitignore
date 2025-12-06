@@ -222,4 +222,10 @@ data/poi/poi_culture_tourisme.geojson
 data/poi/poi_bureaux2.geojson 
 data/poi/poi_sports_loisirs.geojson 
 
+data/poi/poi_administration.geojson
+data/poi/poi_culture.geojson
+data/poi/poi_education.geojson
+data/poi/poi_monument.geojson
+data/poi/poi_sante.geojson
+
 cache
