@@ -30,6 +30,16 @@ DEPARTEMENTS_IDF = ["75", "77", "78", "91", "92", "93", "94", "95"]
 
 # POI : séléction des POI les plus utiles pour notre analyse
 POI_CATEGORIES = {
+    "commerce": {"tags": {"shop": True}},
+    "restaurants": {"tags": {"amenity": "restaurant"}},
+    "bureaux": {"tags": {"office": True}},
+    "administration": {"tags": {"amenity": ["townhall", "Government"]}},
+    "culture": {"tags": {"amenity": ["theatre", "museum", "cinema", "arts_centre"]}},
+    "education": {"tags": {"amenity": "school"}},
+    "sante": {"tags": {"amenity": "hospital"}},
+    "logement": {"tags": {"building": ["residential", "apartments", "house", "detached", "semi-detached"]}},
+    "monument": {"tags": {"historic": "monument", "tourism": "attraction"}},
+    "sports": {"tags": {"Leisure": ["sports_centre", "pitch", "stadium", "swimming_pool"]}},
     "commerce_proximite": {"tags":{"amenity": ["cafe","bar","fast_food"], "shop": ["bakery","supermarket","convenience"]}},
     "commerce_majeur": {"tags":{"shop": ["mall","department_store"]}},
     "education2": {"tags":{"amenity": ["school","kindergarten","college","university"]}},
