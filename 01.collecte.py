@@ -29,8 +29,7 @@ IDF_BBOX = {
 DEPARTEMENTS_IDF = ["75", "77", "78", "91", "92", "93", "94", "95"]
 
 # POI : séléction des POI les plus utiles pour notre analyse
-POI_CATEGORIES = {
-    "commerce": {"tags": {"shop": True}},
+POI_CATEGORIES = {"commerce": {"tags": {"shop": True}},
     "restaurants": {"tags": {"amenity": "restaurant"}},
     "bureaux": {"tags": {"office": True}},
     "administration": {"tags": {"amenity": ["townhall", "government"]}},
@@ -40,7 +39,16 @@ POI_CATEGORIES = {
     "logement": {"tags": {"building": ["residential", "apartments", "house", "detached", "semi-detached"]}},
     "monument": {"tags": {"historic": "monument", "tourism": "attraction"}},
     "sports": {"tags": {"leisure": ["sports_centre", "pitch", "stadium", "swimming_pool"]}},
+    "commerce_proximite": {"amenity": ["cafe","bar","fast_food"], "shop": ["bakery","supermarket","convenience"]},
+    "commerce_majeur": {"shop": ["mall","department_store"]},
+    "education2": {"amenity": ["school","kindergarten","college","university"]},
+    "sante2": {"amenity": ["hospital", "clinic", "doctors"]},
+    "administration2": {"amenity": ["townhall","courthouse","police","post_office"]},
+    "culture_tourisme": {"amenity":["museum","cinema","theatre"], "tourism":["attraction","museum"], "historic":"monument"},
+    "bureaux2": {"office": ["company", "corporate", "it", "administrative", "government"]}, 
+    "sports_loisirs": {"leisure": ["sports_centre","stadium","pitch","swimming_pool"]}
 }
+
 
 try:
     import osmnx as ox
@@ -113,7 +121,7 @@ def extraire_poi_osm(categorie):
 # UTILISATION
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
-    telecharger_gtfs_idfm()
+    #telecharger_gtfs_idfm()
 
     for cat in POI_CATEGORIES:
         out_file = POI_DIR / f"poi_{cat}.geojson"
