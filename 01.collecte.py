@@ -159,7 +159,9 @@ def convertir_geojson_en_parquet(poi_dir=POI_DIR):
 # UTILISATION
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
-    #telecharger_gtfs_idfm()
+    telecharger_gtfs_idfm()
+    stop_times = pd.read_csv("data/gtfs/stop_times.txt")
+    stop_times.to_parquet("data/gtfs/stop_times.parquet", compression="snappy") #conversion en parquet pour pouvoir le push
 
     convertir_geojson_en_parquet()
     
