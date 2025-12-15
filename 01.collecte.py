@@ -156,10 +156,45 @@ def convertir_geojson_en_parquet(poi_dir=POI_DIR):
     print("\nConversion GeoJSON → Parquet terminée.")
 
 # ---------------------------------------------------------------------------
+# 3. Validations
+# ---------------------------------------------------------------------------
+
+def telecharger_donnees_validation() :
+    url = {"data/validations/validations_rf.csv":(
+    "https://data.iledefrance-mobilites.fr"
+    "/api/explore/v2.1/catalog/datasets/"
+    "validations-reseau-ferre-nombre-validations-par-jour-2eme-trimestre"
+    "/exports/csv"
+),"data/validations/validations_rds.csv":(
+    "https://data.iledefrance-mobilites.fr"
+    "/api/explore/v2.1/catalog/datasets/"
+    "validations-reseau-surface-nombre-validations-par-jour-2eme-trimestre"
+    "/exports/csv"
+),"data/ref/ref_lignes.csv":(
+    "https://data.iledefrance-mobilites.fr"
+    "/api/explore/v2.1/catalog/datasets/"
+    "referentiel-des-lignes"
+    "/exports/csv"
+),"data/ref/shapes.csv":(
+    "https://data.iledefrance-mobilites.fr"
+    "/api/explore/v2.1/catalog/datasets/"
+    "traces-des-lignes-de-transport-en-commun-idfm"
+    "/exports/csv"
+)}
+    for out_path in url.keys() :
+        with requests.get(url[out_path], stream=True, timeout=120) as r:
+            r.raise_for_status()
+            with open(out_path, "wb") as f:
+                for chunk in r.iter_content(chunk_size=1024 * 1024):
+                    if chunk:
+                        f.write(chunk)
+                        
+# ---------------------------------------------------------------------------
 # UTILISATION
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     telecharger_gtfs_idfm()
+    telecharger_donnees_validations()
     stop_times = pd.read_csv("data/gtfs/stop_times.txt")
     stop_times.to_parquet("data/gtfs/stop_times.parquet", compression="snappy") #conversion en parquet pour pouvoir le push
 
